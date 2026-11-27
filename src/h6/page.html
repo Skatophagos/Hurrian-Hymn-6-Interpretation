@@ -1,0 +1,748 @@
+<title>Hurrian Hymn h.6</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="A workbench for the Hurrian hymn h.6 from Ugarit: a playable nine-string lyre, the CBS 10996 string pairs, the UET VII 74 retuning cycle, and the major readings of the notation side by side.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gentium+Book+Plus:ital,wght@0,400;0,700;1,400;1,700&family=Gloock&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Cuneiform&display=swap">
+<style>
+/* Layout: masthead with the first notation line in cuneiform; below, a sticky lyre "bench" (left)
+   beside a tabbed workspace (right). One column under 980px. Colours from Ur inlay: bitumen, shell,
+   lapis, carnelian, gold; the tablet panel alone is clay. */
+:root{
+  --bg:#EEF0EC; --panel:#F8F9F6; --sunk:#E3E6E0; --ink:#1D1A16; --ink2:#55524B; --ink3:#7E7B72; --rule:#CDD0C8;
+  --lapis:#23418E; --lapis-wash:#DDE4F3; --carn:#A33F28; --carn-wash:#F2DED7; --gold:#87661B; --gold-wash:#EEE5CC;
+  --gut:#A98236; --wood:#5C4632; --wood2:#7A5E44; --clay:#D8CBB4; --clay-ink:#2A221B; --clay-rule:#A08F74; --shell:#F7F4EC;
+  --shadow:0 1px 0 rgba(29,26,22,.04),0 8px 22px rgba(29,26,22,.07);
+  --f-display:"Gloock","Gentium Book Plus",Georgia,serif;
+  --f-text:"Gentium Book Plus","Gentium Plus","Noto Serif",Georgia,serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --f-cun:"Noto Sans Cuneiform","Segoe UI Historic",sans-serif;
+  --fx-tint:rgba(80,55,25,.06); --fx-break:rgba(70,48,25,.16); --fx-hl:rgba(35,65,142,.16);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#121210; --panel:#1A1A17; --sunk:#0C0C0A; --ink:#EAE5D9; --ink2:#B3AD9F; --ink3:#8A857A; --rule:#33322C;
+  --lapis:#8EA6EE; --lapis-wash:#1D2643; --carn:#E8806A; --carn-wash:#3A211A; --gold:#D7B35E; --gold-wash:#2F2714;
+  --gut:#CDAA62; --wood:#6E5440; --wood2:#8E6F53; --clay:#2C251E; --clay-ink:#ECE2D0; --clay-rule:#6A5A46; --shell:#E9E3D3; --fx-tint:rgba(255,235,200,.045); --fx-break:rgba(0,0,0,.32); --fx-hl:rgba(142,166,238,.2);
+  --shadow:0 1px 0 rgba(0,0,0,.3),0 10px 26px rgba(0,0,0,.38); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121210; --panel:#1A1A17; --sunk:#0C0C0A; --ink:#EAE5D9; --ink2:#B3AD9F; --ink3:#8A857A; --rule:#33322C;
+  --lapis:#8EA6EE; --lapis-wash:#1D2643; --carn:#E8806A; --carn-wash:#3A211A; --gold:#D7B35E; --gold-wash:#2F2714;
+  --gut:#CDAA62; --wood:#6E5440; --wood2:#8E6F53; --clay:#2C251E; --clay-ink:#ECE2D0; --clay-rule:#6A5A46; --shell:#E9E3D3; --fx-tint:rgba(255,235,200,.045); --fx-break:rgba(0,0,0,.32); --fx-hl:rgba(142,166,238,.2);
+  --shadow:0 1px 0 rgba(0,0,0,.3),0 10px 26px rgba(0,0,0,.38); color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+#soundBtn{white-space:nowrap}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-text);font-size:16.5px;line-height:1.55;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1360px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:var(--lapis);text-underline-offset:2px}
+button,select,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--lapis);outline-offset:2px;border-radius:3px}
+h1,h2{font-family:var(--f-display);font-weight:400;letter-spacing:-.01em;text-wrap:balance;margin:0}
+h3{font-family:var(--f-text);font-size:19px;margin:0 0 .4em;text-wrap:balance}
+p{margin:0 0 .8em}
+i,em{font-style:italic}
+.tl,.akk{font-style:italic}
+.kicker{font-family:var(--f-mono);font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink3)}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.cf{font-family:var(--f-cun);font-style:normal;letter-spacing:.02em}
+.muted{color:var(--ink2)}
+kbd{font-family:var(--f-mono);font-size:11px;border:1px solid var(--rule);border-bottom-width:2px;border-radius:4px;padding:0 4px;background:var(--panel)}
+
+/* masthead */
+.mast{padding-block:28px 0}
+.mast-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px;align-items:end}
+.mast h1{font-size:clamp(40px,6.2vw,72px);line-height:.98}
+.mast h1 .h6{color:var(--lapis)}
+.lede{font-size:18px;max-width:60ch;color:var(--ink2);margin-top:14px}
+.mast-line{border-left:1px solid var(--rule);padding-left:22px;min-width:0}
+.mast-line .cf{font-size:clamp(22px,2.6vw,32px);line-height:1.5;color:var(--ink);display:block;word-break:break-all}
+.mast-line .tl{display:block;color:var(--ink2);font-size:15px;margin-top:6px}
+.mast-line .kicker{display:block;margin-bottom:8px}
+.inlay{height:7px;margin-top:24px;background:repeating-linear-gradient(90deg,var(--lapis) 0 12px,transparent 12px 15px,var(--shell) 15px 19px,transparent 19px 22px,var(--carn) 22px 27px,transparent 27px 30px,var(--gold) 30px 34px,transparent 34px 37px);opacity:.9;border-block:1px solid var(--rule)}
+
+/* layout */
+.layout{display:grid;grid-template-columns:360px minmax(0,1fr);gap:28px;padding-block:22px 40px;align-items:start}
+.bench{position:sticky;top:calc(env(safe-area-inset-top,0px) + 14px);background:var(--panel);border:1px solid var(--rule);border-radius:10px;box-shadow:var(--shadow);padding:16px 16px 14px;min-width:0}
+.bench-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.tun-name{font-size:28px;font-style:italic;line-height:1.1;margin-top:2px}
+.tun-meta{font-size:13.5px;color:var(--ink2);margin-top:4px}
+#lyre{width:100%;height:auto;display:block;touch-action:pan-y;user-select:none;-webkit-user-select:none;margin-top:4px}
+.hint{font-size:13px;color:var(--ink3);margin:2px 0 8px;text-align:center}
+.bench-info{font-size:14px;min-height:2.8em;border-top:1px solid var(--rule);padding-top:8px;color:var(--ink2)}
+.bench-info b{color:var(--ink);font-weight:700}
+.bench-foot{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--rule);background:var(--panel);border-radius:7px;padding:7px 12px;cursor:pointer;font-size:15px;line-height:1.2;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--lapis)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.small{font-size:13px;padding:4px 9px}
+.btn.ghost{background:transparent}
+.btn.primary{background:var(--lapis);border-color:var(--lapis);color:var(--bg)}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn .ico{font-family:var(--f-mono);font-size:12px}
+a.chip{text-decoration:none}a.chip:hover{border-color:currentColor}
+.chip{display:inline-flex;align-items:center;gap:5px;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.02em;border:1px solid var(--rule);border-radius:999px;padding:2px 9px;color:var(--ink2);background:var(--panel);white-space:nowrap}
+.chip.lapis{border-color:var(--lapis);color:var(--lapis);background:var(--lapis-wash)}
+.chip.carn{border-color:var(--carn);color:var(--carn);background:var(--carn-wash)}
+.chip.gold{border-color:var(--gold);color:var(--gold);background:var(--gold-wash)}
+
+/* tabs */
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;gap:2px;border-bottom:1px solid var(--rule);overflow-x:auto;scrollbar-width:none;margin-bottom:22px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{font-family:var(--f-mono);font-size:12px;letter-spacing:.09em;text-transform:uppercase;border:0;background:none;padding:13px 12px 11px;cursor:pointer;color:var(--ink3);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;text-decoration:none}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--lapis)}
+.view-head{display:grid;gap:6px;margin-bottom:18px}
+.view-head h2{font-size:clamp(28px,3.2vw,38px);line-height:1.05}
+.view-head p{max-width:72ch;color:var(--ink2);margin:0}
+.view h3{margin-top:30px}
+
+/* presets */
+.presets{display:flex;flex-wrap:wrap;gap:7px}
+.preset{border:1px solid var(--rule);background:var(--panel);border-radius:8px;padding:6px 11px 5px;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;line-height:1.15;min-width:84px}
+.preset b{font-weight:700;font-size:15px}
+.preset span{font-family:var(--f-mono);font-size:11px;color:var(--ink3)}
+.preset:hover{border-color:var(--lapis)}
+.preset[aria-checked="true"]{background:var(--lapis-wash);border-color:var(--lapis)}
+.preset[aria-checked="true"] b{color:var(--lapis)}
+.preset.custom[aria-checked="true"]{background:var(--gold-wash);border-color:var(--gold)}
+.preset.custom[aria-checked="true"] b{color:var(--gold)}
+.preset-card{margin:14px 0 4px;display:grid;gap:8px}
+.preset-card p{margin:0;max-width:78ch}
+.preset-card .chips{display:flex;flex-wrap:wrap;gap:6px}
+details.hyp{border:1px solid var(--rule);border-radius:9px;background:var(--panel);margin:12px 0 16px}
+details.hyp summary{cursor:pointer;padding:10px 14px;font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+.hyp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px 18px;padding:4px 14px 16px}
+.field{display:grid;gap:4px;min-width:0}
+.field label{font-size:13.5px;color:var(--ink2)}
+.field select{width:100%;border:1px solid var(--rule);background:var(--bg);border-radius:6px;padding:6px 8px;font-size:14.5px}
+.field select:disabled{opacity:.45}
+.hyp-sub{grid-column:1/-1;border-top:1px dashed var(--rule);padding-top:10px;margin-top:2px}
+
+/* transport */
+.transport{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin:6px 0 16px;padding:10px 12px;border:1px solid var(--rule);border-radius:9px;background:var(--panel)}
+.transport label{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--ink2)}
+.transport select{border:1px solid var(--rule);background:var(--bg);border-radius:6px;padding:4px 6px;font-size:14px}
+.transport input[type=range]{width:120px;accent-color:var(--lapis)}
+.transport output,.dur{font-family:var(--f-mono);font-size:12.5px;color:var(--ink2);font-variant-numeric:tabular-nums}
+.transport .spacer{flex:1}
+.toggle{display:flex;align-items:center;gap:6px;font-size:14px;color:var(--ink2)}
+.toggle input{accent-color:var(--lapis)}
+
+/* tiles */
+.tiles{display:grid;gap:10px}
+.tline{display:grid;grid-template-columns:44px minmax(0,1fr);gap:8px;align-items:start}
+.tl-num{border:0;background:none;cursor:pointer;text-align:right;padding:8px 2px 0 0;font-family:var(--f-mono);font-size:12px;color:var(--ink3);line-height:1.2}
+.tl-num b{display:block;font-family:var(--f-display);font-weight:400;font-size:24px;color:var(--ink);line-height:1}
+.tl-num:hover b{color:var(--lapis)}
+.tl-row{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+.tile{position:relative;display:grid;grid-template-rows:auto auto auto;justify-items:center;gap:1px;border:1px solid var(--rule);background:var(--panel);border-radius:6px;padding:6px 9px 6px;cursor:pointer;min-width:74px;text-align:center;transition:border-color .12s,background .12s,transform .12s}
+.tile:hover{border-color:var(--lapis)}
+.tile .cf{font-size:17px;line-height:1.25;color:var(--ink2);white-space:nowrap}
+.tile .tl{font-size:14.5px;line-height:1.2;white-space:nowrap}
+.tile .meta{display:flex;align-items:baseline;gap:8px;font-family:var(--f-mono);font-size:12px;color:var(--ink3)}
+.tile .num{font-family:var(--f-display);font-size:22px;line-height:1;color:var(--ink)}
+.tile .num.unc{color:var(--carn);text-decoration:underline dotted;text-underline-offset:3px}
+.tile .num.chg{color:var(--gold)}
+.tile .nn{font-size:12.5px;color:var(--ink2);white-space:nowrap}
+.tile.word{border-style:dashed;background:transparent;color:var(--ink2)}
+.tile.word .tl{color:var(--ink2)}
+.tile.illeg{background:repeating-linear-gradient(135deg,transparent 0 5px,var(--sunk) 5px 7px)}
+.tile.var::after{content:"";position:absolute;top:5px;right:5px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.tile.sel{border-color:var(--lapis);box-shadow:0 0 0 1px var(--lapis) inset}
+.tile.now{background:var(--lapis-wash);border-color:var(--lapis);transform:translateY(-1px)}
+.no-cf .tile .cf{display:none}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--ink3);margin:10px 0 0 52px}
+.legend i{font-style:normal;display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:0}
+
+/* inspector */
+.inspector{margin:14px 0 0 52px;border:1px solid var(--rule);border-left:3px solid var(--lapis);border-radius:8px;background:var(--panel);padding:14px 16px;display:grid;gap:10px}
+.insp-top{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline}
+.insp-top .cf{font-size:30px}
+.insp-top .tl{font-size:22px}
+.insp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px 22px;font-size:14.5px}
+.insp-grid dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3)}
+.insp-grid dd{margin:2px 0 0}
+.app-list{display:flex;flex-wrap:wrap;gap:6px}
+.app-list span{font-size:13.5px;border:1px solid var(--rule);border-radius:6px;padding:2px 8px;background:var(--bg)}
+.app-list span b{font-family:var(--f-mono);font-size:10.5px;font-weight:500;color:var(--ink3);margin-right:5px;letter-spacing:.04em}
+.app-list span.diff{border-color:var(--gold);background:var(--gold-wash)}
+.insp-actions{display:flex;flex-wrap:wrap;gap:8px}
+
+/* roll */
+.roll-shell{margin-top:20px;border:1px solid var(--rule);border-radius:10px;background:var(--panel);overflow:hidden}
+.roll-head{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;padding:9px 12px;border-bottom:1px solid var(--rule)}
+.roll-head .cap{font-size:14px;color:var(--ink2);flex:1;min-width:200px}
+.zoom{display:flex;gap:4px}
+.roll-body{display:grid;grid-template-columns:62px minmax(0,1fr)}
+#rollLabels{display:block;border-right:1px solid var(--rule);background:var(--panel)}
+.roll-scroll{overflow-x:auto;overflow-y:hidden;scroll-behavior:smooth}
+#roll{display:block}
+.r-band-a{fill:var(--panel)} .r-band-b{fill:var(--sunk);opacity:.55}
+.r-band-sel{fill:var(--lapis-wash)}
+.r-row{stroke:var(--rule);stroke-width:1}
+.r-row.mid{stroke:var(--ink3);stroke-dasharray:2 3}
+.r-row.virt{stroke-dasharray:1 4;opacity:.6}
+.r-slab.virt,.r-snote.virt{font-style:italic;opacity:.7}
+.pub-note{font-size:14px;margin:8px 0 0;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.r-line{stroke:var(--ink3);stroke-width:1}
+.r-lab{font-family:var(--f-mono);font-size:10px;fill:var(--ink3)}
+.r-lab.ln{font-size:11px;fill:var(--ink);font-weight:500}
+.r-term{font-family:var(--f-text);font-style:italic;font-size:11.5px;fill:var(--ink2)}
+.r-num{font-family:var(--f-mono);font-size:10px;fill:var(--ink3)}
+.r-dyad{fill:var(--lapis)} .r-note{fill:var(--gold)} .r-emb{fill:var(--carn)} .r-drone{fill:var(--ink3);opacity:.45} .r-aud{fill:var(--ink2)}
+.r-stem{stroke:var(--lapis);stroke-width:1.5}
+.r-rest{fill:url(#hatch)}
+.r-mark{stroke:var(--carn);stroke-dasharray:3 3;stroke-width:1.2}
+.r-mark-t{font-family:var(--f-text);font-style:italic;font-size:11.5px;fill:var(--carn)}
+.r-ph{stroke:var(--carn);stroke-width:2}
+.r-slab{font-family:var(--f-mono);font-size:11px;fill:var(--ink2)}
+.r-snote{font-family:var(--f-text);font-size:11.5px;fill:var(--ink3)}
+
+/* fit */
+.fit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;margin-top:20px}
+.card{border:1px solid var(--rule);border-radius:10px;background:var(--panel);padding:14px 16px;min-width:0}
+.card h3{margin-top:0}
+.card p:last-child{margin-bottom:0}
+.big{font-family:var(--f-display);font-size:34px;line-height:1}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);font-weight:500}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.ok{color:var(--lapis)} .bad{color:var(--carn)}
+.table-wrap{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;background:var(--panel)}
+.table-wrap table th:first-child,.table-wrap table td:first-child{padding-left:14px}
+
+/* tuning */
+.tune-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:start}
+.wheel-fig{margin:0;border:1px solid var(--rule);border-radius:12px;background:var(--panel);padding:10px}
+#wheel{width:100%;height:auto;display:block}
+.wheel-fig figcaption{font-size:13.5px;color:var(--ink2);padding:2px 6px 4px}
+.w-edge{stroke:var(--lapis);stroke-width:2.5;fill:none}
+.w-edge.named{stroke:var(--gold);stroke-width:5}
+.w-edge.unclear{stroke:var(--carn);stroke-width:2.5;stroke-dasharray:6 5}
+.w-sec{stroke:var(--ink3);stroke-width:1;opacity:.35;fill:none}
+.w-hit{stroke:transparent;stroke-width:18;fill:none;cursor:pointer}
+.w-elab{font-family:var(--f-text);font-style:italic;font-size:14px;fill:var(--ink2)}
+.w-elab.named{fill:var(--gold);font-weight:700}
+.w-elab.unclear{fill:var(--carn)}
+.w-node{fill:var(--bg);stroke:var(--ink2);stroke-width:1.5;cursor:pointer}
+.w-node.next{stroke:var(--carn);stroke-width:2.5}
+.w-num{font-family:var(--f-mono);font-size:14px;fill:var(--ink);font-weight:500;pointer-events:none}
+.w-note{font-family:var(--f-text);font-size:14px;fill:var(--ink2);pointer-events:none}
+.w-note.alt{fill:var(--gold);font-weight:700}
+.w-center{font-family:var(--f-text);font-style:italic;font-size:30px;fill:var(--ink)}
+.w-sub{font-family:var(--f-text);font-size:13.5px;fill:var(--ink2)}
+.w-disc{fill:var(--panel);opacity:.93}
+.w-pulse{fill:none;stroke:var(--carn);stroke-width:1.5;opacity:.7}
+@media (prefers-reduced-motion:no-preference){.w-pulse{animation:pulse 1.8s ease-out infinite;transform-box:fill-box;transform-origin:center}}
+@keyframes pulse{0%{transform:scale(1);opacity:.75}100%{transform:scale(1.65);opacity:0}}
+.instr{border:1px solid var(--rule);border-radius:12px;background:var(--panel);padding:16px 18px}
+.instr .q{font-size:19px;line-height:1.45;margin:6px 0 10px}
+.instr .q b{font-style:italic}
+.instr .akkline{font-size:14px;color:var(--ink2)}
+.warn{border-left:3px solid var(--carn);background:var(--carn-wash);padding:8px 12px;border-radius:0 7px 7px 0;font-size:14px;margin-top:10px}
+.tune-btns{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.drift{font-size:14.5px;color:var(--ink2);margin-bottom:12px}
+.steps{display:flex;align-items:stretch;overflow-x:auto;border:1px solid var(--rule);border-radius:10px;background:var(--panel);padding:12px 10px}
+.st-node{display:grid;justify-items:center;min-width:44px;gap:2px}
+.st-node .n{font-family:var(--f-mono);font-size:11px;color:var(--ink3)}
+.st-node .p{font-size:17px}
+.st-node.alt .p{color:var(--gold);font-weight:700}
+.st-gap{display:grid;place-items:center;min-width:42px;font-family:var(--f-mono);font-size:10.5px;color:var(--ink3);text-align:center;line-height:1.2}
+.st-gap b{display:block;font-family:var(--f-text);font-size:15px;color:var(--ink);font-weight:700}
+.st-gap.S b{color:var(--carn)}
+.tunings td,.tunings th{white-space:nowrap}
+.tunings tr.cur td{background:var(--lapis-wash)}
+.tunings td.alt{color:var(--gold);font-weight:700}
+.tunings tr{cursor:pointer}
+.tunings tr:hover td{background:var(--sunk)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:20px}
+
+/* dichords */
+.dich-top{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:22px;align-items:start;margin-bottom:22px}
+.matrix-fig{margin:0;border:1px solid var(--rule);border-radius:12px;background:var(--panel);padding:10px}
+#matrix{width:100%;height:auto;display:block}
+.m-cell{stroke:var(--rule);stroke-width:1;cursor:pointer}
+.m-cell.p{fill:var(--lapis-wash)} .m-cell.s{fill:var(--gold-wash)} .m-cell.n{fill:var(--sunk)}
+.m-cell.unclear{stroke:var(--carn);stroke-width:2.5}
+.m-cell:hover{stroke:var(--ink)}
+.m-name{font-family:var(--f-text);font-style:italic;font-size:12.5px;fill:var(--ink);pointer-events:none}
+.m-pair{font-family:var(--f-mono);font-size:10px;fill:var(--ink3);pointer-events:none}
+.m-ax{font-family:var(--f-mono);font-size:11.5px;fill:var(--ink2)}
+.dtab td{white-space:nowrap}
+.dtab td.wrap{white-space:normal;min-width:150px}
+.dtab tr.p td:first-child{border-left:3px solid var(--lapis)}
+.dtab tr.s td:first-child{border-left:3px solid var(--gold)}
+.dtab tr.pairtop td{border-top:2px solid var(--rule)}
+.dtab .cf{font-size:18px}
+.dtab .absent{color:var(--ink3)}
+.pairnum{font-family:var(--f-display);font-size:20px}
+
+/* tablet */
+.tablet-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:22px;align-items:start}
+.tablet{background:var(--clay);color:var(--clay-ink);border-radius:18px 22px 16px 24px / 20px 16px 24px 18px;padding:22px 22px 24px;box-shadow:inset 0 0 0 1px var(--clay-rule),inset 0 -14px 30px rgba(0,0,0,.08);min-width:0}
+.tb-sec{margin:0 0 10px}
+.tb-sec .kicker{color:var(--clay-ink);opacity:.7;display:block;margin-bottom:6px}
+.tb-line{display:grid;grid-template-columns:28px minmax(0,1fr);gap:6px;margin-bottom:8px;font-size:15.5px;line-height:1.75}
+.tb-line .ln{font-family:var(--f-mono);font-size:11.5px;opacity:.65;padding-top:4px}
+.tb-words{display:flex;flex-wrap:wrap;gap:2px 9px;min-width:0}
+.w{text-align:left;font-style:italic;cursor:pointer;border-radius:3px;padding:0 2px;background:none;border:0;color:inherit;font-size:inherit;line-height:inherit}
+.w:hover{background:rgba(0,0,0,.07)}
+.w.rep{box-shadow:inset 0 -2px 0 var(--gold)}
+.w.sel{background:var(--panel);color:var(--ink)}
+.w .n{font-style:normal;font-family:var(--f-mono);font-size:12px;margin-left:4px;opacity:.8}
+.rule2{height:5px;border-block:1.5px solid var(--clay-rule);margin:14px 0}
+.rule1{height:0;border-top:1.5px solid var(--clay-rule);margin:14px 0}
+.tablet-side{display:grid;gap:14px;min-width:0}
+.app-table td,.app-table th{padding:5px 8px}
+.app-table td:last-child{font-style:italic}
+.collation td{white-space:nowrap;font-size:13.5px}
+.collation td.d{background:var(--gold-wash)}
+.collation td .tl{font-style:italic}
+.collation tr.lstart td{border-top:2px solid var(--rule)}
+
+/* scholars */
+.mult{display:grid;gap:10px}
+.mrow{display:grid;grid-template-columns:200px minmax(0,1fr) auto;gap:14px;align-items:center;border:1px solid var(--rule);border-radius:10px;background:var(--panel);padding:10px 12px}
+.mrow h4{margin:0;font-size:17px}
+.mrow h4 span{font-family:var(--f-mono);font-size:11px;font-weight:400;color:var(--ink3);margin-left:6px}
+.mrow .msub{font-size:12.5px;color:var(--ink3);font-family:var(--f-mono)}
+.mrow svg{width:100%;height:70px;display:block;background:var(--bg);border-radius:6px}
+.mrow .acts{display:flex;gap:6px}
+.cmp td{font-size:14px}
+.cmp td:first-child{white-space:nowrap;font-weight:700}
+
+/* sources */
+.biblio{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
+.biblio ul{margin:0;padding-left:18px}
+.biblio li{margin-bottom:6px;font-size:14.5px}
+.prose{max-width:74ch}
+footer{border-top:1px solid var(--rule);padding-block:18px 28px;font-size:13.5px;color:var(--ink3)}
+
+.tip{position:fixed;z-index:50;max-width:280px;background:var(--ink);color:var(--bg);font-size:13.5px;line-height:1.4;padding:7px 10px;border-radius:7px;pointer-events:none;box-shadow:var(--shadow)}
+.tip i{opacity:.85}
+
+/* lyre */
+.ly-box{fill:var(--wood);stroke:var(--wood2);stroke-width:1.5}
+.ly-arm{stroke:var(--wood);stroke-width:13;stroke-linecap:round;fill:none}
+.ly-arm2{stroke:var(--wood2);stroke-width:4;stroke-linecap:round;fill:none;opacity:.6}
+.ly-yoke{stroke:var(--wood2);stroke-width:11;stroke-linecap:round}
+.ly-bridge{fill:var(--shell);stroke:var(--wood2)}
+.ly-in-a{fill:var(--lapis)} .ly-in-b{fill:var(--shell)} .ly-in-c{fill:var(--carn)} .ly-in-d{fill:var(--gold)}
+.ly-str{stroke:var(--gut);stroke-width:1.6;fill:none;transition:stroke .2s}
+.ly-str.hot{stroke:var(--lapis);stroke-width:2.2}
+.ly-hit{stroke:transparent;stroke-width:22;cursor:pointer}
+.ly-peg{fill:var(--shell);stroke:var(--wood);stroke-width:1.5}
+.ly-notch{stroke:var(--wood);stroke-width:2;stroke-linecap:round;transition:transform .5s}
+.ly-note{font-family:var(--f-text);font-size:15px;fill:var(--ink);text-anchor:middle}
+.ly-note.alt{fill:var(--gold);font-weight:700}
+.ly-num{font-family:var(--f-mono);font-size:13px;fill:var(--shell);text-anchor:middle;font-weight:500}
+.ly-g:focus{outline:none}
+.ly-g:focus-visible .ly-str{stroke:var(--lapis);stroke-width:2.6}
+.ly-unclear{stroke:var(--carn);stroke-width:1.5;stroke-dasharray:3 3;fill:none}
+
+/* appendix A: facsimile */
+.sg-tools{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;margin-bottom:12px;font-size:14px}
+.check{display:inline-flex;gap:7px;align-items:center;cursor:pointer}
+.sg-legend{display:flex;flex-wrap:wrap;gap:6px 14px;color:var(--ink2);font-size:13px}
+.sg-legend span{display:inline-flex;align-items:center;gap:5px}
+.sg-legend i,.sg-state span{display:inline-block;width:14px;height:14px;border-radius:3px;border:1px solid var(--clay-rule);background:var(--clay)}
+.sw-ok{background:var(--clay)!important}
+.sw-dam{background:repeating-linear-gradient(135deg,var(--clay) 0 3px,var(--clay-rule) 3px 4px)!important}
+.sw-part{background:linear-gradient(90deg,var(--clay) 0 50%,var(--fx-break) 50%)!important}
+.sw-rest,.sw-lost{background:var(--fx-break)!important}
+.sw-rest{border-style:dashed!important}
+.sw-trace{background:repeating-linear-gradient(45deg,var(--fx-break) 0 2px,var(--clay) 2px 5px)!important}
+.qm{font-family:var(--f-mono);color:var(--carn)} .nogm{font-family:var(--f-mono)}
+.sg-tabs{display:grid;gap:16px;min-width:0;position:relative}
+.facs{min-width:0}
+.sg-pop{position:absolute;z-index:6;width:min(390px,calc(100% - 4px));max-height:min(560px,72vh);overflow:auto;box-shadow:0 2px 0 rgba(29,26,22,.05),0 18px 44px rgba(29,26,22,.22);border-color:var(--lapis)}
+.sg-pop .x{position:sticky;top:0;float:right;margin:-6px -8px 0 6px;border:0;background:var(--panel);font-size:20px;line-height:1;padding:4px 8px;cursor:pointer;color:var(--ink2);border-radius:6px}
+.sg-pop .x:hover{color:var(--ink);background:var(--sunk)}
+.sg-hint{font-size:14px;color:var(--ink2);margin:-4px 0 10px}
+.facs-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:0 0 6px}
+.fx-pieces{display:flex;gap:8px;font-family:var(--f-mono);font-size:11px;color:var(--ink3)}
+.fx-pieces .pc{border:1px solid var(--rule);border-radius:4px;padding:1px 6px}
+.fx-pieces .pc.L{background:var(--fx-tint)}
+.facs-scroll{overflow-x:auto;border-radius:18px 22px 16px 24px / 20px 16px 24px 18px;box-shadow:inset 0 0 0 1px var(--clay-rule)}
+.facs-clay{position:relative;background:var(--clay);color:var(--clay-ink);padding:14px 14px 16px;width:max-content;min-width:100%;background-image:radial-gradient(circle at 20% 30%,rgba(255,255,255,.05),transparent 40%),radial-gradient(circle at 80% 70%,rgba(0,0,0,.05),transparent 45%)}
+.fx-row{display:flex;align-items:stretch;min-height:44px}
+.fx-ln{flex:0 0 28px;font-family:var(--f-mono);font-size:10.5px;opacity:.6;padding-top:6px;margin-left:-6px}
+.fx-part{display:flex;align-items:flex-start;gap:4px;padding:3px 0}
+.fx-part.L{background:var(--fx-tint);padding-left:14px;margin-left:-14px;padding-right:5px}
+.fx-part.R{flex:1;padding-left:5px;padding-right:14px;margin-right:-14px}
+.fx-seam{flex:0 0 2px}
+.fx-over{font-size:14px;opacity:.55;align-self:center;margin-left:4px}
+.fx-crack{position:absolute;left:0;top:0;pointer-events:none;overflow:visible}
+.fx-crack polyline{fill:none;stroke:var(--clay-ink);stroke-width:1.3;stroke-dasharray:5 3;opacity:.45}
+.fx-rule2{height:6px;border-block:1.5px solid var(--clay-rule);margin:8px -14px 8px 12px}
+.fx-rule1{border-top:1.5px solid var(--clay-rule);margin:8px -14px 8px 12px}
+.fx-blank{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.45;text-align:center;padding:36px 0 26px}
+.sw{display:inline-flex;gap:0;border-radius:5px;padding:0 1px;transition:background .15s}
+.sw.hl{background:var(--fx-hl);box-shadow:0 0 0 1px var(--lapis)}
+.sg{display:inline-grid;justify-items:center;align-content:start;gap:0;min-width:19px;padding:2px 1px 1px;border:1px solid transparent;border-radius:4px;background:none;cursor:pointer;color:inherit;font:inherit;line-height:1}
+.sg .g{font-family:var(--f-cun);font-size:19px;line-height:1.25;min-height:24px;display:block}
+.sg .r{font-family:var(--f-text);font-style:italic;font-size:10.5px;line-height:1.1;opacity:.75;white-space:nowrap}
+.no-tr .sg .r{display:none}
+.sg:hover{border-color:var(--clay-rule)}
+.sg.sel{background:var(--panel);color:var(--ink);border-color:var(--lapis);box-shadow:0 0 0 1px var(--lapis)}
+.sg.num .g{font-weight:700}
+.sg.st-dam .g{opacity:.62;background:repeating-linear-gradient(135deg,transparent 0 3px,rgba(0,0,0,.12) 3px 4px);border-radius:3px}
+.sg.st-part .g{-webkit-mask-image:linear-gradient(90deg,#000 0 52%,rgba(0,0,0,.28) 52%);mask-image:linear-gradient(90deg,#000 0 52%,rgba(0,0,0,.28) 52%)}
+.sg.st-part{background:linear-gradient(90deg,transparent 52%,var(--fx-break) 52%)}
+.sg.st-rest{background:var(--fx-break);border:1px dashed var(--clay-rule)}
+.sg.st-rest .g{opacity:.38}
+.sg.st-lost,.sg.st-gap{background:var(--fx-break);min-width:26px}
+.sg.st-gap{min-width:60px}
+.sg.st-gap .g{font-size:14px;opacity:.6}
+.sg.st-trace{background:repeating-linear-gradient(45deg,var(--fx-break) 0 2px,transparent 2px 5px)}
+.sg.q .r::after{content:""}
+.sg.q .g{position:relative}
+.sg.q .g::after{content:"?";position:absolute;top:-3px;right:-6px;font-family:var(--f-mono);font-size:10px;color:var(--carn)}
+.sg.nog .g{font-family:var(--f-mono);font-size:18px;opacity:.6}
+.sg.sel.st-rest,.sg.sel.st-lost{background:var(--panel)}
+.sg-card{display:grid;gap:10px}
+.sg-big{display:flex;gap:14px;align-items:center}
+.sg-big .cf{font-size:56px;line-height:1;min-width:64px;text-align:center;background:var(--clay);color:var(--clay-ink);border-radius:10px;padding:6px 8px}
+.sg-read{font-size:22px}
+.sg-state{display:flex;gap:8px;align-items:center;font-size:14px;margin:0}
+.sg-word{font-style:italic;font-size:17px}
+.sg-word .hl{background:var(--lapis-wash);color:var(--lapis);border-radius:3px;padding:0 2px;font-weight:700}
+.sg-word .dash{opacity:.6}
+.gloss td{font-size:14px;vertical-align:top}
+.gloss td.wrap{white-space:normal;min-width:180px}
+.gloss tr{cursor:pointer}
+.gloss tr:hover td{background:var(--sunk)}
+.clauses{display:grid;gap:6px}
+.clause{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;text-align:left;border:1px solid var(--rule);background:var(--bg);border-radius:7px;padding:6px 9px;cursor:pointer;font-size:14px;line-height:1.35}
+.clause[aria-pressed="true"]{border-color:var(--lapis);background:var(--lapis-wash)}
+.transl{margin:0;padding-left:0;list-style:none;display:grid;gap:7px;font-size:14.5px}
+.transl .mono{font-size:11px;margin-right:6px}
+
+/* appendix B: fragments */
+.fr-ctl{flex-wrap:wrap;gap:10px 18px}
+.fr-ctl label{display:inline-flex;gap:8px;align-items:center;font-size:14px}
+.fr-ctl select{max-width:280px}
+.fr-rule-note{font-size:14px;margin:8px 0 0}
+.big-row{display:flex;flex-wrap:wrap;gap:16px;margin:8px 0 10px}
+.frtab td{font-size:14px;white-space:nowrap}
+.frtab td.wrap{white-space:normal;min-width:160px}
+.frtab tr{cursor:pointer}
+.frtab tr:hover td{background:var(--sunk)}
+.frterms td{font-size:14px;vertical-align:top}
+.frterms td.wrap{white-space:normal;min-width:200px}
+.frterms td:first-child{white-space:nowrap}
+.frag-list{display:grid;gap:14px;margin-top:22px}
+.fcard{border:1px solid var(--rule);border-radius:12px;background:var(--panel);padding:14px 16px;scroll-margin-top:60px;min-width:0}
+.fcard header{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;margin-bottom:10px}
+.fcard h4{font-family:var(--f-display);font-weight:400;font-size:24px;margin:0}
+.fcard .chips{display:flex;flex-wrap:wrap;gap:6px}
+.fcard-body{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:18px}
+.fcard-txt{font-size:14.5px;min-width:0}
+.fr-lines{display:grid;gap:5px}
+.fr-line{display:grid;grid-template-columns:28px minmax(0,1fr);gap:6px;align-items:start}
+.fr-line>.mono{font-size:11px;color:var(--ink3);padding-top:6px}
+.fr-tiles{display:flex;flex-wrap:wrap;gap:5px}
+.fr-gap{height:0;border-top:1px dashed var(--rule);margin:4px 0 2px 34px}
+.ft{display:inline-grid;grid-auto-flow:column;align-items:baseline;gap:7px;border:1px solid var(--rule);border-radius:6px;background:var(--bg);padding:3px 8px;font-size:13.5px;line-height:1.3;color:inherit;font-family:inherit;cursor:pointer}
+.ft:hover{border-color:var(--lapis)}
+.ft.p{border-left:3px solid var(--lapis)} .ft.s{border-left:3px solid var(--gold)}
+.ft .tl{font-style:italic}
+.ft .pr{font-family:var(--f-mono);font-size:11px;color:var(--ink3)}
+.ft .nm{font-family:var(--f-display);font-size:17px;line-height:1}
+.ft .nm.unc{color:var(--carn)}
+.ft.word{border-style:dashed;background:transparent;color:var(--ink2)}
+.ft.illeg{background:repeating-linear-gradient(135deg,transparent 0 5px,var(--sunk) 5px 7px);cursor:default}
+.ft.gap{border:0;background:none;color:var(--ink3);cursor:default}
+.ft.alt::after{content:"*";color:var(--gold);font-family:var(--f-mono)}
+.qb{font-family:var(--f-mono);font-size:12px;margin-left:3px;padding:0 3px;border-radius:3px;color:var(--carn);background:var(--carn-wash)}
+.fr-play{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin:10px 0 6px;font-size:13px}
+.fr-roll{width:100%;height:64px;display:block;background:var(--bg);border-radius:6px;color:var(--ink)}
+.r-sharp{fill:var(--carn)!important}
+.fr-notes{margin-top:8px;font-size:13.5px}
+.fr-notes summary,.fr-lyr summary{cursor:pointer;color:var(--ink2);font-size:13.5px}
+.fr-notes div{margin:3px 0}
+.fr-words{margin:0 0 10px;padding-left:18px}
+.fr-words li{margin-bottom:4px}
+.fr-lyr ol{margin:6px 0 0;padding-left:26px;font-size:13.5px;color:var(--ink2)}
+.fr-colo{margin-top:10px}
+
+/* wheel tools and CBS 1766 */
+.wheel-tools{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;padding:4px 6px 8px}
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+.seg button{border:0;background:var(--panel);padding:5px 10px;font:inherit;font-size:13px;cursor:pointer;color:var(--ink2)}
+.seg button[aria-checked="true"]{background:var(--lapis);color:var(--bg)}
+.check.small{font-size:13px}
+.s-circ{fill:none;stroke:var(--ink3);stroke-width:1.2;opacity:.6}
+.s-hept{stroke:var(--ink3);stroke-width:1;opacity:.35;fill:none}
+.s-hept.S{stroke:var(--gold);stroke-width:3;opacity:.9}
+.s-hlab{font-family:var(--f-mono);font-size:10.5px;fill:var(--ink3)}
+.s-hlab.S{fill:var(--gold);font-weight:700}
+.s-name{font-family:var(--f-text);font-style:italic;font-size:12.5px;fill:var(--ink2)}
+.s-third{stroke:var(--gold);stroke-width:1.2;stroke-dasharray:2 3;opacity:.7;fill:none}
+.w-edge.trace,.s-third.trace{stroke:var(--carn);stroke-width:5;opacity:1;stroke-dasharray:none}
+.s-hept.trace{stroke:var(--carn);stroke-width:4;opacity:1}
+.cbs-grid{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:18px;align-items:start}
+.cbs td,.cbs th{text-align:center;font-family:var(--f-mono);font-size:14px;padding:6px 8px}
+.cbs th button{font:inherit;border:1px solid var(--rule);border-radius:5px;background:var(--bg);padding:2px 8px;cursor:pointer}
+.cbs th button:hover{border-color:var(--lapis)}
+.cbs tbody tr{cursor:pointer}
+.cbs tbody tr:hover td{background:var(--sunk)}
+.cbs td.em{color:var(--carn)}
+.cbs td.gap{color:var(--ink3)}
+.cbs td.on{background:var(--carn-wash)}
+
+@media (max-width:980px){
+  .layout{grid-template-columns:minmax(0,1fr)}
+  .bench{position:relative;top:0}
+  #lyre{max-height:330px}
+  .mast-grid{grid-template-columns:minmax(0,1fr)}
+  .mast-line{border-left:0;border-top:1px solid var(--rule);padding:14px 0 0}
+  .tune-grid,.dich-top,.tablet-grid,.fit,.sg-grid,.fcard-body,.cbs-grid{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:620px){
+  .sg-pop{position:fixed;left:8px!important;right:8px;top:auto!important;bottom:8px;width:auto;max-height:52vh}
+  body{font-size:16px}
+  .tline{grid-template-columns:30px minmax(0,1fr)}
+  .legend,.inspector{margin-left:0}
+  .tile{min-width:64px;padding:5px 7px}
+  .mrow{grid-template-columns:minmax(0,1fr)}
+  .roll-body{grid-template-columns:50px minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<header class="mast">
+  <div class="wrap mast-grid">
+    <div>
+      <p class="kicker">RS 15.30 + 15.49 + 17.387 · Ugarit · c. 1400 BCE</p>
+      <h1>Hurrian Hymn <span class="h6">h.6</span></h1>
+      <p class="lede">A <i>zaluzi</i> for Nikkal in the <i>nīd qablim</i> tuning, “hand of Ammurabi”, notated as named string pairs and numerals for a nine-string <i>sammûm</i>. Pluck the lyre, retune it as the Old Babylonian texts prescribe, and hear what each reading makes of the same signs.</p>
+    </div>
+    <div class="mast-line">
+      <span class="kicker">Tablet l. 5, the first line of notation</span>
+      <span class="cf" lang="akk-Xsux">𒆏𒇷𒋼 𒐈 𒅕𒁍𒋼 𒁹 𒆏𒇷𒋼 𒐈 𒊭𒄴𒊑 𒁹 𒄿𒊬𒋼 𒌋 𒍑𒋫𒈠𒀀𒊑</span>
+      <span class="tl">qáb-li-te 3 ir-bu-te 1 qáb-li-te 3 ša-aḫ-ri 1 i-šar-te 10 uš-ta-ma-a-ri</span>
+    </div>
+  </div>
+  <div class="wrap"><div class="inlay" aria-hidden="true"></div></div>
+</header>
+
+<div class="wrap layout">
+  <aside class="bench" aria-label="Lyre">
+    <div class="bench-head">
+      <div>
+        <span class="kicker">Sammûm · nine strings</span>
+        <div class="tun-name" id="benchTuning">nīd qablim</div>
+        <div class="tun-meta" id="benchMeta"></div>
+      </div>
+      <button id="soundBtn" class="btn small ghost" aria-pressed="true" type="button">Sound on</button>
+    </div>
+    <svg id="lyre" viewBox="0 0 400 430" aria-label="Lyre with nine strings"></svg>
+    <p class="hint">Keys <kbd>1</kbd>–<kbd>9</kbd> pluck · drag across the strings to strum</p>
+    <div class="bench-info" id="benchInfo">String 1 is the “front” string in Nabnītu XXXII. Pluck any string to see its name and pitch.</div>
+    <div class="bench-foot" id="benchFoot"></div>
+  </aside>
+
+  <main>
+    <nav class="tabs" role="tablist" aria-label="Views">
+      <a class="tab" role="tab" href="#score" data-tab="score" id="t-score">Reading engine</a>
+      <a class="tab" role="tab" href="#tuning" data-tab="tuning" id="t-tuning">Retuning</a>
+      <a class="tab" role="tab" href="#dichords" data-tab="dichords" id="t-dichords">String pairs</a>
+      <a class="tab" role="tab" href="#tablet" data-tab="tablet" id="t-tablet">Editions</a>
+      <a class="tab" role="tab" href="#scholars" data-tab="scholars" id="t-scholars">Readings compared</a>
+      <a class="tab" role="tab" href="#signs" data-tab="signs" id="t-signs">A · Sign by sign</a>
+      <a class="tab" role="tab" href="#fragments" data-tab="fragments" id="t-fragments">B · Other pieces</a>
+      <a class="tab" role="tab" href="#sources" data-tab="sources" id="t-sources">Sources</a>
+    </nav>
+
+    <!-- ===== SCORE ===== -->
+    <section class="view" id="view-score" role="tabpanel" aria-labelledby="t-score">
+      <div class="view-head">
+        <h2>Reading engine</h2>
+        <p>Each transcription of h.6 rests on a handful of decisions: which edition of the signs, which way the strings run, whether a term sounds as a pair or a run, and what the numeral counts. Load a scholar’s decisions, or change any of them. The tiles are the tablet’s own information; the roll beneath is what the chosen hypothesis makes of it.</p>
+      </div>
+      <div class="presets" id="presets" role="radiogroup" aria-label="Scholar presets"></div>
+      <div class="preset-card" id="presetCard"></div>
+      <details class="hyp" id="hyp"><summary>Settings for this reading</summary><div class="hyp-grid" id="hypGrid"></div></details>
+      <div class="transport">
+        <button id="playBtn" class="btn primary" type="button"><span class="ico">▶</span> Play</button>
+        <label for="lineSel">Lines <select id="lineSel"></select></label>
+        <label for="bpm">Tempo <input type="range" id="bpm" min="40" max="160" step="2" value="84"><output id="bpmOut" for="bpm">84</output></label>
+        <span class="spacer"></span>
+        <label class="toggle" for="cfToggle"><input type="checkbox" id="cfToggle" checked> Cuneiform</label>
+        <span class="dur" id="durOut"></span>
+      </div>
+      <div class="tiles" id="tiles"></div>
+      <div class="legend" id="tileLegend">
+        <span><i style="background:var(--gold)"></i>reads differently from D&amp;L 1975</span>
+        <span><i style="background:var(--carn)"></i>numeral damaged or queried</span>
+        <span>Tap a tile to inspect and hear it</span>
+      </div>
+      <div class="inspector" id="insp" hidden></div>
+      <div class="roll-shell">
+        <div class="roll-head">
+          <span class="kicker">String roll</span>
+          <span class="cap" id="rollCap"></span>
+          <div class="zoom"><button class="btn small" id="zoomOut" type="button" aria-label="Zoom out">−</button><button class="btn small" id="zoomIn" type="button" aria-label="Zoom in">+</button></div>
+        </div>
+        <div class="roll-body"><svg id="rollLabels" aria-hidden="true"></svg><div class="roll-scroll" id="rollScroll"><svg id="roll" role="img" aria-label="String roll of the current realization"></svg></div></div>
+      </div>
+      <div class="fit" id="fit"></div>
+    </section>
+
+    <!-- ===== TUNING ===== -->
+    <section class="view" id="view-tuning" role="tabpanel" aria-labelledby="t-tuning" hidden>
+      <div class="view-head">
+        <h2>Retuning: UET VII 74</h2>
+        <p>The Old Babylonian “tuning text” U.7/80 (UET VII 74, with the duplicate UET VI/3 899) takes the <i>sammûm</i> through seven tunings. In each, six of the seven primary pairs are “clear” (<i>zakû</i>) and one is “not clear” (<i>la zakû</i>). Adjust one string and that pair clears, another goes unclear, and the tuning takes a new name. The diagram can be drawn two ways: as the seven-pointed star of CBS 1766, which lays out the same cycle with the strings in their own order, or as a modern ring of fifths.</p>
+      </div>
+      <div class="tune-grid">
+        <figure class="wheel-fig"><div class="wheel-tools"><div class="seg" role="radiogroup" aria-label="Diagram"><button type="button" role="radio" data-wm="star">CBS 1766 star</button><button type="button" role="radio" data-wm="ring">Ring of fifths</button></div><label class="check small" id="thirdsLab"><input type="checkbox" id="thirdsTog"> thirds (7/2 star)</label><button class="btn small" type="button" id="traceBtn">Trace the star</button></div>
+          <svg id="wheel" viewBox="0 0 440 400" aria-label="Diagram of the seven primary string pairs"></svg>
+          <figcaption id="wheelCap"></figcaption></figure>
+        <div>
+          <div class="instr" id="instr"></div>
+          <div class="tune-btns">
+            <button class="btn" id="loosenBtn" type="button"><span class="ico">◂</span> Loosen</button>
+            <button class="btn primary" id="tightenBtn" type="button">Tighten <span class="ico">▸</span></button>
+            <button class="btn" id="beforeAfterBtn" type="button">Hear unclear → clear</button>
+            <button class="btn" id="cycleBtn" type="button">Play the whole cycle</button>
+            <button class="btn ghost" id="resetBtn" type="button">Back to nīd qablim</button>
+          </div>
+          <div class="drift" id="drift"></div>
+          <div class="steps" id="steps" aria-label="Steps between adjacent strings"></div>
+        </div>
+      </div>
+      <h3>The seven tunings</h3>
+      <p class="muted">Pitch names follow the current string order and frame. Gold cells are the strings moved from <i>nīd qablim</i>. Click a row to retune the lyre.</p>
+      <div class="table-wrap"><table class="tunings" id="tunTable"></table></div>
+      <div class="cards" id="tuneCards"></div>
+      <h3>CBS 1766: the same cycle as a star</h3>
+      <p class="muted prose">A small tablet in Philadelphia draws a seven-pointed star in a double circle, its points numbered 1–7 and labelled with the names of the first seven strings (as reread by Waerzeggers &amp; Siebes 2007), with a table of numbers below. Click a column to trace its chain on the star above; click a row to see Friberg’s pairs of parallel lines.</p>
+      <div class="cbs-grid"><div class="table-wrap"><table class="cbs" id="cbsTab"></table></div><div class="cards" id="cbsCards" style="margin-top:0"></div></div>
+    </section>
+
+    <!-- ===== DICHORDS ===== -->
+    <section class="view" id="view-dichords" role="tabpanel" aria-labelledby="t-dichords" hidden>
+      <div class="view-head">
+        <h2>Fourteen string pairs: CBS 10996</h2>
+        <p>A Nippur(?) list of mathematical coefficients, CBS 10996, includes a short section naming fourteen pairs of strings (SA) by number. Babylonian theory had no word for an abstract fifth or fourth, only for these particular pairs. Seven strings give 21 pairs: the 14 named ones are exactly the pairs that are not neighbours.</p>
+      </div>
+      <div class="dich-top">
+        <figure class="matrix-fig"><svg id="matrix" viewBox="0 0 420 400" aria-label="All 21 pairs of seven strings"></svg></figure>
+        <div class="card" id="dichNotes"></div>
+      </div>
+      <div class="table-wrap"><table class="dtab" id="dtab"></table></div>
+      <h3>How the list is written</h3>
+      <div class="cards" style="margin-top:12px">
+        <div class="card"><h3>The order of the numbers</h3><p>The primaries are written 1·5, 2·6, 3·7, then 4·1, 5·2, 6·3, 7·4. Each secondary shares the primary’s second string: the first three end on it (7·5, 1·6, 2·7), the last four start from it (1·3, 2·4, 3·5, 4·6), where 3·1, 4·2, 5·3, 6·4 would continue the pattern. The tablet gives the list twice, as bare numbers and terms (ll. a–10) and again naming every string (ll. 11–24), in the same order both times (Kilmer 1971: 134–35).</p><p>Kilmer (1960: 299) saw the first strings advance line by line, “but to what purpose is not clear”. Duchesne-Guillemin (1963) took the turn from 7 back to 1 for a sign of a cyclic, heptatonic system. Kümmel (1970) showed that the primaries, followed in their written direction from the namesake pair, give the tuning chain. Wulstan (1971: 375–76) read 1·6 and 2·7 as 8→6 and 9→7, so that every secondary runs against its primary, and made this his rule for h.6. West (1994, n. 8) saw no principle and thought the order could not have mattered in practice. For Hagel (2005: 294–97) the primaries turn into fourths only to stay within seven strings, and the break in the secondaries is “most probably meaningless”: the compiler did not adjust them when the primaries turned. Bayer (2014: 66–70) reads each entry as a conjunction and the primaries as a “+4 or −3” mnemonic in which 1 stands for 8.</p><p>Counted round the seven strings, the primaries are uniformly +4; only the secondaries change, from +5 to +2. In string numbers the Wulstan and Dumbrill run rules on this page are the same (primaries up the numbers through a fifth, secondaries down them through a third, so 1·3 runs 3–2–1); they sound opposite only because Wulstan puts string 1 at the bottom and Dumbrill at the top.</p></div>
+        <div class="card"><h3>Nine strings, two numberings</h3><p>Nabnītu XXXII (U.3011 = UET VII 126) names nine strings palindromically, from the front string to the fifth and then from the “fourth behind” to the “behind”, and ends “9 strings”. CBS 10996 uses these names for strings 1–7, calling 6 the “fourth behind” and 7 the “third behind” (Kilmer 1960: 300 nn. 1, 3; 1971: 135). The names only count right on nine strings, so the list’s instrument had nine though the list stops at seven, as U.7/80 implies when it moves “1 and 8” and “2 and 9” together.</p><p>YBC 11381 (Payne 2010), Neo-Babylonian and probably from Uruk, numbers nine strings straight through, SA 1 to 9, each with a god and a benediction. Two notes use the old names. Above SA 3 a gloss adds SIG, “thin”, which completes the Nabnītu name sa.3.sa.sig, <i>šalšu qatnu</i>, “third, thin” (the other two glosses on that line give the reading of two words of the benediction; Payne 2010: 294). On the left edge, level with string 3, stands <i>šal-šú uḫ-ri</i>, “third behind”, that is string 7. Payne reads the edge note with string 3 as the interval 3·7, <i>embūbu</i>, so perhaps the tuning in which the songs were sung (2010: 297). CBS 10996 l. 15 names <i>embūbu</i> by these same two names, “third thin” and “third behind” (Kilmer 1971: 135), and in U.7/80 ll. 1–3 the string tightened to make <i>embūbum</i> clear is the “third thin”. That both names match is this page’s observation, not Payne’s argument. Its parallel BM 65217+66616 (Kilmer 1984) is a set of benedictions “of the singer for the king”; Kilmer suggests that the string marks the note on which a piece ends (or begins).</p><p>Dumbrill (n.d.) reads the nine SA as nine “enneatonic” scales from an extended U.7/80 cycle without octave identity; the tablet itself gives only string numbers and incipits, and his nine scales are the seven tunings plus two repeated an apotome higher (see Retuning). Gibson (2021: 95–96) takes the tablets to show that both numberings were known, and notes that Enmešarra stands on string 2 in BM 65217+66616 but on string 9 here: perhaps 2 ≡ 9.</p></div>
+      </div>
+    </section>
+
+    <!-- ===== TABLET ===== -->
+    <section class="view" id="view-tablet" role="tabpanel" aria-labelledby="t-tablet" hidden>
+      <div class="view-head">
+        <h2>The tablet</h2>
+        <p>Four lines of Hurrian text (written in a spiral across obverse, edge and reverse), a double ruling, six lines of notation, a single ruling and an Akkadian colophon. The text follows Dietrich &amp; Loretz 1975; click any word or term to compare the editions.</p>
+      </div>
+      <div class="tablet-grid">
+        <div class="tablet" id="tablet"></div>
+        <aside class="tablet-side" id="tabSide"></aside>
+      </div>
+      <h3>Collation of the notation</h3>
+      <p class="muted">Gold cells differ from Dietrich &amp; Loretz 1975 in term or numeral. Aligned after Goranson’s comparative table, with Gibson 2026’s queries.</p>
+      <div class="table-wrap"><table class="collation" id="collation"></table></div>
+      <h3>Around the tablet: music at Ugarit</h3>
+      <p class="muted">What the Ugaritic texts say about song, singers, the lyre and Nikkal, after Koitabashi 1985–1998.</p>
+      <div class="cards ug-ctx" style="margin-top:12px">
+        <div class="card"><h3>A genre named by its tuning</h3><p>The colophon calls h.6 “a song of the <i>nīd qabli</i>”. Koitabashi (1996: 23–25) sets it beside Mesopotamian hymn colophons, which give the genre and then the copyist: TU 57 ends “<i>balag</i> of Enlil, not finished, for its singing”, written by Nidintu-Anu, lamentation priest (<i>kalû</i>) of Anu. The Middle Assyrian catalogue KAR 158 has a heading <i>irâtu ša nīd qabli</i>, “<i>irtu</i>-songs of the <i>nīd qabli</i>” (viii 49). Where <i>adab</i>, <i>balag</i> or <i>tigi</i> name an instrument and the Psalms’ “song of ascents” an occasion, this genre is named by its tuning. He hears it as Lydian, with Kilmer, Crocker and Brown, where Vitale heard Dorian: read up from string 1, <i>nīd qabli</i> has the Lydian’s steps, read down, the Dorian’s.</p></div>
+        <div class="card"><h3>Instructions for performers</h3><p>Koitabashi compares the other ways the ancient Near East told performers what to do. The Late Babylonian Converse Tablet puts drum names (<i>meze</i>, <i>šem</i>) in its left margin, vowel signs inside the text, and insertions ending <i>ana</i> SIR-<i>ru</i>, “to be sung”, in the right margin. Psalm headings name the leader, the accompaniment (“with strings”) and a tune (“to the Doe of the Dawn”, “Do not destroy”). Egyptian reliefs put hand-signallers beside the players: for Hickmann, thumb to forefinger gives the base note, the open hand the fifth above. h.6 alone is a letter notation that sets out a part in detail; Mesopotamian in its terms and script, it was probably brought to Ugarit by Hurrians (1996: 19–23; 1998: 379).</p></div>
+        <div class="card"><h3>Singers</h3><p>Ugaritic administrative lists name <i>šrm</i>, “singers” (from <i>šr</i>, “to sing”): a “singer of Ugarit”, a “singer of Ashtart”, a songstress (<i>šrt</i>). They drew rations as “personnel of the king” (<i>bnš mlk</i>), paid tribute (20 shekels in KTU 4.610), supplied bowmen, and some held land; Ymd is “the singer at the disposal of Ansny”, perhaps his teacher. In a monthly rite the singer sings ten times before the king, who then opens his hand (KTU 1.106). One singer, <i>bn kdgdl</i>, may bear a Hurrian name: Krispijn linked <i>kdg</i> to Kušuḫ, the Hurrian moon god (Koitabashi 1985; 1998: 365–68).</p></div>
+        <div class="card"><h3>The lyre, a god</h3><p>Ugaritic <i>knr</i>, the lyre (Akkadian <i>kinnāru</i>, known at Ebla, Mari, Alalakh and Emar; Hittite <i>kinirtalla-</i>, Greek <i>kinyra</i>), stands among the gods in the pantheon lists (KTU 1.47:32, 1.118:31; Akkadian <sup>d</sup><i>kinnāru</i>, RS 20.24:31) and receives offerings (KTU 1.148:9). Koitabashi (1992) explains this by the lyre’s power over the feelings of gods and spirits, as when David’s lyre drives the evil spirit from Saul and Gudea’s temple harp is called a “counsellor”. In KTU 1.101 Anat “takes her lyre in her hand, puts the ‘cow’ (<i>rimt</i>) to her breast”: he takes <i>rimt</i> for the sound box, after Sumerian ab₂-za₃-mi₂, “cow of the <i>sammûm</i>”, the instrument of the tuning texts (1998: 373–74).</p></div>
+        <div class="card"><h3>Nikkal in Ugaritic song</h3><p>Nikkal is sung in Ugaritic too. KTU 1.24 opens “I sing of Nikkal-and-Ib” (<i>ašr nkl w ib</i>), tells of her marriage to the moon god Yariḫ, and then calls on the Kotharat, goddesses of marriage and birth. Koitabashi (1998: 386–87) reads it as a song for a royal wedding that asks for a safe childbirth, close to the fertility prayer that Thiel and Krispijn find in h.6.</p></div>
+      </div>
+    </section>
+
+    <!-- ===== SCHOLARS ===== -->
+    <section class="view" id="view-scholars" role="tabpanel" aria-labelledby="t-scholars" hidden>
+      <div class="view-head">
+        <h2>One line, every reading</h2>
+        <p>The same line of notation run through each preset. Rows are strings, highest at the top. Every roll is drawn from the scholar’s own edition and string order, so differences come from the decisions, not from the drawing.</p>
+      </div>
+      <div class="transport"><label for="multLine">Line <select id="multLine"></select></label><span class="spacer"></span><span class="dur">Each roll is scaled to the width of the row</span></div>
+      <div class="mult" id="mult"></div>
+      <h3>Decisions at a glance</h3>
+      <div class="table-wrap"><table class="cmp" id="cmp"></table></div>
+      <div class="cards" id="notModelled"></div>
+    </section>
+
+    <!-- ===== APPENDIX A ===== -->
+    <section class="view" id="view-signs" role="tabpanel" aria-labelledby="t-signs" hidden>
+      <div class="view-head">
+        <span class="kicker">Appendix A</span>
+        <h2>h.6 sign by sign</h2>
+        <p>A normalised copy drawn for this page: every sign of Dietrich &amp; Loretz’s text, set in standard Unicode cuneiform and laid out on the two joined pieces, with damage marked as the editors mark it. It is not a trace of a photograph or of a published hand copy, and the sign forms are not the Ugarit scribe’s. Click a sign.</p>
+      </div>
+      <p class="sg-hint">Each lyric line runs across the obverse, over the edge (↷) and on along the reverse. Dashed line: the join between the two pieces.</p>
+      <div class="sg-tools"><label class="check"><input type="checkbox" id="sgTr"> Transliteration under the signs</label><span class="sg-legend"><span><i class="sw-ok"></i>clear</span><span><i class="sw-dam"></i>damaged ˹ ˺</span><span><i class="sw-part"></i>partly restored</span><span><i class="sw-rest"></i>restored [ ]</span><span><i class="sw-lost"></i>lost</span><span><i class="sw-trace"></i>traces x</span><span><b class="qm">?</b>uncertain</span><span><b class="nogm">□</b>no Unicode glyph</span></span></div>
+      <div class="sg-tabs" id="sgTabs"><div class="facs" id="facsObv"></div><div class="facs" id="facsRev"></div>
+        <div class="card sg-card sg-pop" id="sgCard" role="dialog" aria-label="Reading of the selected sign" hidden></div>
+      </div>
+      <h3>What the lyric words mean, word by word</h3>
+      <p class="muted">Status of each word of ll. 1–4 (the repeated openings of ll. 2–4 are listed once). <span id="glossCount"></span></p>
+      <div class="table-wrap"><table class="gloss" id="glossTab"></table></div>
+      <div class="cards">
+        <div class="card"><h3>Seven clauses</h3><p class="muted">Hurrian marks the head of a clause with the enclitic <i>-l(la)</i>, “they”, on its first word: <i>tašal</i>, <i>išalla</i>, <i>wešal</i>, <i>uklal</i>, <i>niḫurašal</i>, <i>attayaštal</i>. Laroche (1955) and Duchesne-Guillemin (1984) divide the text this way. Click to light a clause up on the copy.</p><div class="clauses" id="clauses"></div></div>
+        <div class="card"><h3>Translations so far</h3><p class="muted">Only phrases can be translated, and the two attempts disagree in detail. Short excerpts:</p><ul class="transl" id="translEx"></ul></div>
+        <div class="card"><h3>How the copy is made</h3><p>Sign readings: Dietrich &amp; Loretz 1975, with the other editions in the side panel. Which signs fall on RS 15.30 + 15.49 and which on RS 17.387, and where each lyric line runs over the edge onto the reverse, follow Laroche 1955 and 1968. The text is written in a spiral: each lyric line crosses the obverse, turns over the right edge and finishes on the reverse, which is why the reverse shows the two pieces the other way round. For l. 3 the turn is placed approximately. RUM and KIB have no Unicode glyph in the font used here and are drawn as □.</p></div>
+      </div>
+    </section>
+
+    <!-- ===== APPENDIX B ===== -->
+    <section class="view" id="view-fragments" role="tabpanel" aria-labelledby="t-fragments" hidden>
+      <div class="view-head">
+        <span class="kicker">Appendix B</span>
+        <h2>The other Hurrian pieces</h2>
+        <p>h.6 is the only tablet complete enough to perform, but some thirty other pieces from the same find carry the same notation. Here they are in Laroche’s editions (PRU III, 1955, for h.2–h.5; Ugaritica V, 1968, for h.7–h.30) or in Dumbrill’s 2005 transliteration, which restores more, each run through a scholar’s h.6 rules so that the fragments can be heard on the same terms. Restorations are kept in brackets and played as written; in Laroche’s text a broken term is named only where the surviving signs allow a single reading.</p>
+      </div>
+      <div class="transport fr-ctl">
+        <label for="frText">Text <select id="frText"><option value="L">Laroche 1955/1968</option><option value="D">Dumbrill 2005</option></select></label>
+        <label for="frRule">Rules <select id="frRule"></select></label>
+        <label for="frQual">ašḫuwe / turie <select id="frQual"><option value="octave">an octave up / down (cf. Dumbrill)</option><option value="west">West: “lower” moves the tune to string 1</option><option value="hagel">Hagel 2005: ašḫuwe raises f to f♯</option><option value="none">ignored</option></select></label>
+        <label for="frSingles">etamašeani, ḫapšema <select id="frSingles"><option value="false">words, not played</option><option value="true">single strings 4 and 5 (West)</option></select></label>
+      </div>
+      <p class="muted fr-rule-note" id="frRuleNote"></p>
+      <div class="cards fr-sum" id="frSum" style="margin-top:12px"></div>
+      <h3>Catalogue</h3>
+      <div class="table-wrap"><table class="frtab" id="frTab"></table></div>
+      <div class="frag-list" id="frList"></div>
+      <h3>Words outside CBS 10996</h3>
+      <p class="muted">Terms found in the fragments but not in the Babylonian list of fourteen pairs.</p>
+      <div class="table-wrap"><table class="frterms" id="frTerms"></table></div>
+    </section>
+
+    <!-- ===== SOURCES ===== -->
+    <section class="view" id="view-sources" role="tabpanel" aria-labelledby="t-sources" hidden>
+      <div class="view-head">
+        <h2>Sources and method</h2>
+        <p>What the page computes, what it approximates, and where each piece comes from.</p>
+      </div>
+      <div class="cards" style="margin-top:0">
+        <div class="card"><h3>What is exact</h3><p>String pairs and their order follow CBS 10996. The seven tunings are generated from the UET VII 74 cycle in Pythagorean intonation (tone 9:8, limma 256:243; each adjustment moves one string by an apotome, 2187:2048). Interval names, cents and the clear/unclear status are computed, not looked up. Strings 8 and 9 follow 1 and 2 at the octave, as the double instructions “1 and 8”, “2 and 9” in the tuning text imply. The Hagel preset swaps in the just tuning of his MIDI files, the variant of Hagel 2005, Table 3 with c a pure fifth above f (pure <i>embūbum</i>); c pure to g (pure <i>kitmum</i>) or tempered between is under Fine tuning.</p></div>
+        <div class="card"><h3>What is entered, what is generated</h3><p>Five readings are played note for note from the published staff transcriptions: Wulstan 1971, Kilmer 1974 (Figs 7–8, including her re-ordering of the lines), Vitale 1982 (Tableau XIV), Dumbrill 2005 (Plate 5) and Dumbrill 2014. The others are generated from the scholar’s rules (edition, string order, how a term sounds, what the numeral counts); Duchesne-Guillemin’s rhythm is simplified, and Krispijn’s rests and Dumbrill’s maqām inflections are not reproduced. The Hagel rules were checked against his MIDI files: they reproduce his h.6 dyad for dyad and, on Laroche’s text, eleven of his sixteen fragment files exactly; his files stay on his site. Changing any setting switches a published reading to its rule-based approximation. Pitch frames are given where Gibson 2026 states them; otherwise they are the engine’s default and can be transposed.</p></div>
+        <div class="card"><h3>Readings of the signs</h3><p>Notation and lyrics are aligned after Casey Goranson’s comparison of Laroche, Kilmer, Duchesne-Guillemin, Dietrich &amp; Loretz, Thiel and Krispijn; the Kilmer and Duchesne-Guillemin columns were then checked against Kilmer 1974 (Fig. 4) and Duchesne-Guillemin 1984, and Dumbrill’s column is his own 2005 reconstruction. Gibson 2026 is entered as D&amp;L with his photographic queries: the 4s in ll. 8–10 may be 5s, l. 7 <i>irbute</i> is 1[+x], and the last numeral is damaged. Cuneiform is set in Noto Sans Cuneiform, a standard sign repertoire rather than the Ugarit ductus.</p></div>
+      </div>
+      <h3>Bibliography</h3>
+      <div class="biblio" id="biblio"></div>
+    </section>
+  </main>
+</div>
+<footer><div class="wrap">Hurrian Hymn h.6 · a study tool. Sound is synthesised in the browser (plucked-string model); no recordings are used.</div></footer>
+<div class="tip" id="tip" hidden></div>
