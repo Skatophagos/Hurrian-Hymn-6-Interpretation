@@ -230,11 +230,36 @@ $('#soundBtn').onclick = () => {
 };
 
 /* ---------------- tabs ---------------- */
+/* The tab strip scrolls sideways when it does not fit: arrows and faded edges show which way there is more. */
+const TABSTRIP = (() => {
+  const bar = document.querySelector('.tabbar'), nav = bar.querySelector('.tabs');
+  const prev = bar.querySelector('.tabs-arrow.prev'), next = bar.querySelector('.tabs-arrow.next');
+  const smooth = () => matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+  function update() {
+    const max = nav.scrollWidth - nav.clientWidth, l = nav.scrollLeft > 2, r = nav.scrollLeft < max - 2;
+    bar.classList.toggle('more-l', l); bar.classList.toggle('more-r', r); prev.hidden = !l; next.hidden = !r;
+  }
+  function step(d) { nav.scrollBy({ left: d * Math.max(160, nav.clientWidth * 0.6), behavior: smooth() }); }
+  function reveal(tab) {
+    if (!tab) return;
+    const pad = 44, a = tab.offsetLeft - pad, b = tab.offsetLeft + tab.offsetWidth + pad - nav.clientWidth;
+    if (nav.scrollLeft > a) nav.scrollTo({ left: Math.max(0, a), behavior: 'auto' });
+    else if (nav.scrollLeft < b) nav.scrollTo({ left: b, behavior: 'auto' });
+    update();
+  }
+  prev.onclick = () => step(-1); next.onclick = () => step(1);
+  nav.addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(update);
+  update();
+  return { reveal, update };
+})();
 const TABS = ['score', 'tuning', 'dichords', 'tablet', 'scholars', 'signs', 'fragments', 'sources'];
 function showTab(name) {
   if (!TABS.includes(name)) name = 'score';
   S.tab = name;
   for (const t of TABS) { $('#view-' + t).hidden = t !== name; $('#t-' + t).setAttribute('aria-selected', String(t === name)); }
+  TABSTRIP.reveal($('#t-' + name));
   renderView(name);
 }
 addEventListener('hashchange', () => showTab(location.hash.slice(1)));
