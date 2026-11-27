@@ -91,10 +91,21 @@ a.chip{text-decoration:none}a.chip:hover{border-color:currentColor}
 .chip.gold{border-color:var(--gold);color:var(--gold);background:var(--gold-wash)}
 
 /* tabs */
-.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;gap:2px;border-bottom:1px solid var(--rule);overflow-x:auto;scrollbar-width:none;margin-bottom:22px}
+.tabbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--rule);margin-bottom:22px}
+.tabs{position:relative;display:flex;gap:2px;overflow-x:auto;overflow-y:hidden;margin-bottom:-1px;scrollbar-width:none;overscroll-behavior-x:contain}
 .tabs::-webkit-scrollbar{display:none}
-.tab{font-family:var(--f-mono);font-size:12px;letter-spacing:.09em;text-transform:uppercase;border:0;background:none;padding:13px 12px 11px;cursor:pointer;color:var(--ink3);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;text-decoration:none}
+.tab{font-family:var(--f-mono);font-size:12px;letter-spacing:.09em;text-transform:uppercase;border:0;background:none;padding:13px 12px 11px;cursor:pointer;color:var(--ink3);border-bottom:2px solid transparent;white-space:nowrap;text-decoration:none}
+/* when the tabs overflow: fade the cut edge and offer arrows */
+.tabbar.more-r .tabs{-webkit-mask-image:linear-gradient(to left,transparent 30px,#000 72px);mask-image:linear-gradient(to left,transparent 30px,#000 72px)}
+.tabbar.more-l .tabs{-webkit-mask-image:linear-gradient(to right,transparent 30px,#000 72px);mask-image:linear-gradient(to right,transparent 30px,#000 72px)}
+.tabbar.more-l.more-r .tabs{-webkit-mask-image:linear-gradient(to right,transparent 30px,#000 72px,#000 calc(100% - 72px),transparent calc(100% - 30px));mask-image:linear-gradient(to right,transparent 30px,#000 72px,#000 calc(100% - 72px),transparent calc(100% - 30px))}
+.tabs-arrow{position:absolute;top:0;bottom:0;width:32px;display:flex;align-items:center;justify-content:center;border:0;padding:0 0 2px;background:transparent;color:var(--ink2);font-family:var(--f-text);font-size:28px;line-height:1;cursor:pointer;z-index:1}
+.tabs-arrow.prev{left:0}.tabs-arrow.next{right:0}
+.tabs-arrow[hidden]{display:none}
+.tabs-arrow:hover{color:var(--lapis)}
+.tabs-arrow:focus-visible{outline:2px solid var(--lapis);outline-offset:-4px;border-radius:6px}
 .tab:hover{color:var(--ink)}
+.tab .nocase{text-transform:none}
 .tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--lapis)}
 .view-head{display:grid;gap:6px;margin-bottom:18px}
 .view-head h2{font-size:clamp(28px,3.2vw,38px);line-height:1.05}
@@ -550,16 +561,19 @@ footer{border-top:1px solid var(--rule);padding-block:18px 28px;font-size:13.5px
   </aside>
 
   <main>
+    <div class="tabbar">
     <nav class="tabs" role="tablist" aria-label="Views">
       <a class="tab" role="tab" href="#score" data-tab="score" id="t-score">Reading engine</a>
       <a class="tab" role="tab" href="#tuning" data-tab="tuning" id="t-tuning">Retuning</a>
       <a class="tab" role="tab" href="#dichords" data-tab="dichords" id="t-dichords">String pairs</a>
       <a class="tab" role="tab" href="#tablet" data-tab="tablet" id="t-tablet">Editions</a>
       <a class="tab" role="tab" href="#scholars" data-tab="scholars" id="t-scholars">Readings compared</a>
-      <a class="tab" role="tab" href="#signs" data-tab="signs" id="t-signs">A · Sign by sign</a>
-      <a class="tab" role="tab" href="#fragments" data-tab="fragments" id="t-fragments">B · Other pieces</a>
+      <a class="tab" role="tab" href="#signs" data-tab="signs" id="t-signs">Appendix A: <span class="nocase">h.6</span> sign by sign</a>
+      <a class="tab" role="tab" href="#fragments" data-tab="fragments" id="t-fragments">Appendix B: The other Hurrian pieces</a>
       <a class="tab" role="tab" href="#sources" data-tab="sources" id="t-sources">Sources</a>
     </nav>
+    <button class="tabs-arrow prev" type="button" aria-label="Scroll the tabs left" hidden>‹</button><button class="tabs-arrow next" type="button" aria-label="Scroll the tabs right" hidden>›</button>
+    </div>
 
     <!-- ===== SCORE ===== -->
     <section class="view" id="view-score" role="tabpanel" aria-labelledby="t-score">

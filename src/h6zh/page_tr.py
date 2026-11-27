@@ -24,8 +24,10 @@ P = [
 ('id="t-dichords">String pairs</a>', 'id="t-dichords">弦对</a>'),
 ('id="t-tablet">Editions</a>', 'id="t-tablet">各家版本</a>'),
 ('id="t-scholars">Readings compared</a>', 'id="t-scholars">读法比较</a>'),
-('id="t-signs">A · Sign by sign</a>', 'id="t-signs">附录 A · 逐个符号</a>'),
-('id="t-fragments">B · Other pieces</a>', 'id="t-fragments">附录 B · 其他残片</a>'),
+('id="t-signs">Appendix A: <span class="nocase">h.6</span> sign by sign</a>', 'id="t-signs">附录 A：<span class="nocase">h.6</span> 逐个符号</a>'),
+('aria-label="Scroll the tabs left"', 'aria-label="标签向左滚动"'),
+('aria-label="Scroll the tabs right"', 'aria-label="标签向右滚动"'),
+('id="t-fragments">Appendix B: The other Hurrian pieces</a>', 'id="t-fragments">附录 B：其他胡里语残片</a>'),
 ('id="t-sources">Sources</a>', 'id="t-sources">资料来源</a>'),
 # score
 ('<h2>Reading engine</h2>', '<h2>读谱引擎</h2>'),
