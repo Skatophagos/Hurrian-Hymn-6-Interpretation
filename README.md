@@ -24,7 +24,7 @@ The page is in English and Chinese; switch with the English / 中文 buttons at 
 ## Versions
 
 - **v2** (November 2026): rewritten as a standalone page, with thirteen readings, the retuning and string-pair views, both appendices, and English and Chinese in one page.
-- **v1** (August 2026): the first explorer with scholar presets, kept under the tag [`v1.0`](https://github.com/Skatophagos/Hurrian-Hymn-6-Interpretation/tree/v1.0).
+- **v1** (August 2026): the first explorer with scholar presets, kept in the history as [commit f1e6a49](https://github.com/Skatophagos/Hurrian-Hymn-6-Interpretation/tree/f1e6a498113d07568fa6c2f5905537d4646a826e).
 
 ## Building
 
